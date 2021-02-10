@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'localflavor',
     # apps
     'core',
+    'login_app',
 ]
 
 MIDDLEWARE = [
