@@ -17,7 +17,7 @@ from django.contrib import messages
 
 from decouple import config
 
-import Settings.db as Db
+import core.db as db
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,9 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # libs
     'stdimage',
     'ckeditor',
     'localflavor',
+    # apps
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +86,7 @@ WSGI_APPLICATION = 'CanalesSeguros.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = Db.POSTGRESQL
+DATABASES = db.POSTGRESQL
 
 
 # Password validation
@@ -142,3 +145,5 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',
 }
+
+AUTH_USER_MODEL = 'core.User'
