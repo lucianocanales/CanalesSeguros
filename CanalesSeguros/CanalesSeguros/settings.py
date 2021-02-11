@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'stdimage',
     'ckeditor',
     'localflavor',
+    'widget_tweaks',
     # apps
     'core',
     'login_app',
@@ -112,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-ar'
 
 TIME_ZONE = 'UTC'
 
