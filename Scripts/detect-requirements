@@ -1,3 +1,0 @@
-#!C:\Users\Lucho\Desktop\projectosDjango\CanalesSeguros\Scripts\python.exe
-from requirements_detector.run import run
-run()
