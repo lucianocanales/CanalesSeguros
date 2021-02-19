@@ -13,7 +13,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'lib/AdminLTE/dist/css/adminlte.min.css' %}">
   <!-- CSS propio -->
-  <link rel="stylesheet" href="{% static 'apps/index.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
 </head>
 <body class="hold-transition  {% if user.is_authenticated %} sidebar-mini layout-navbar-fixed sidebar-collapse{% else %}layout-top-nav{% endif %}">
 <!-- Site wrapper -->
@@ -87,7 +87,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{% static 'lib/AdminLTE/dist/js/demo.js' %}"></script>
 <!-- js propio -->
-<script src="{% static 'apps/index.js' %}"></script>
+<script src="{% static 'core/js/index.js' %}"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>

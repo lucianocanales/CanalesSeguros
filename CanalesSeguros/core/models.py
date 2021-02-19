@@ -21,7 +21,11 @@ class User(AbstractUser):
         verbose_name='Provicia',
         default='B'
     )
-    zip_code = models.IntegerField(verbose_name='Codigo Postal', default=0)
+    zip_code = models.IntegerField(
+        verbose_name='Codigo Postal',
+        blank=True,
+        null=True
+    )
     birth_date = models.DateField(
         null=True,
         blank=True,
