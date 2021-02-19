@@ -5,6 +5,7 @@ from django.contrib.auth.views import PasswordResetView
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
 
+
 # Create your views here.
 
 
@@ -23,6 +24,7 @@ class ForgotPassword(PasswordResetView):
 class RecoverPassword (PasswordResetConfirmView):
     template_name = 'registration/clave_reset_confirm.html'
     success_url = reverse_lazy('password_reset')
+
     # post_reset_login = True
 
 

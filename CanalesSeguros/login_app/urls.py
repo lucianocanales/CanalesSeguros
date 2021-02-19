@@ -15,7 +15,9 @@ urlpatterns = [
     path(
         'forgot_passwoed/done/',
         auth_views.PasswordResetDoneView.as_view(
-            template_name='registration/clave_reset_done.html'),
+            template_name='registration/clave_reset_done.html',
+            extra_context={'title': 'Se ha enviado un email de recuperación'}
+        ),
         name='forgot_passwoed_done',
     ),
     path(
@@ -26,7 +28,9 @@ urlpatterns = [
     path(
         'reset/done/',
         auth_views.PasswordResetDoneView.as_view(
-            template_name='registration/clave_reset_complete.html'),
+            template_name='registration/clave_reset_complete.html',
+            extra_context={'title': 'Contraseña restablecida con éxito'}
+        ),
         name='password_reset',
     ),
 

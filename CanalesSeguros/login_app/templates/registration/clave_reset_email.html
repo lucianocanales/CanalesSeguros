@@ -1,12 +1,14 @@
 {% autoescape off %}
-To initiate the password reset process for your {{ user.get_username }} TestSite Account,
-click the link below:
+Para iniciar el proceso de restablecimiento de contraseña para su {{ user.get_username }} de la cuenta de Canales Seguros,
+haga clic en el enlace de abajo:
 
 {{ protocol }}://{{ domain }}{% url 'forgot_passwoed_confirm' uidb64=uid token=token %}
 
-If clicking the link above doesn't work, please copy and paste the URL in a new browser
-window instead.
+Si hacer clic en el enlace anterior no funciona, copie y pegue la URL en una nueva ventana
+de su navegador.
 
-Sincerely,
-The TestSite Team
+Si usted no pidió un restablecimiento de cuenta ignore este mensaje.
+
+Atentamente,
+El equipo de Canales Seguros
 {% endautoescape %}
