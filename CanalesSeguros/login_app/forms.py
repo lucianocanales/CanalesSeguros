@@ -7,11 +7,10 @@ User = get_user_model()
 
 
 class SignUpForm(UserCreationForm):
-    dni = ARDNIField()
 
     email = forms.EmailField(
         max_length=254, help_text='Requerido para validar su email.')
 
     class Meta:
         model = User
-        fields = ('username', 'dni', 'email', 'password1', 'password2', )
+        fields = ('username', 'email', 'password1', 'password2', )

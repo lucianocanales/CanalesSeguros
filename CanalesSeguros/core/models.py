@@ -4,6 +4,10 @@ from stdimage import StdImageField
 
 
 class User(AbstractUser):
+    email = models.EmailField(
+        verbose_name='Email',
+        unique=True
+    )
     bio = models.TextField(
         max_length=500,
         blank=True,
