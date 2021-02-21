@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from stdimage import StdImageField
+from localflavor.ar.ar_provinces import PROVINCE_CHOICES
 
 
 class User(AbstractUser):
@@ -23,6 +24,7 @@ class User(AbstractUser):
     provincia = models.CharField(
         max_length=1,
         verbose_name='Provicia',
+        choices=PROVINCE_CHOICES,
         default='B'
     )
     zip_code = models.IntegerField(

@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserChangeForm
+
 from core.models import User
 from localflavor.ar.forms import ARCUITField, ARDNIField
 from localflavor.ar.forms import ARPostalCodeField, ARProvinceSelect
@@ -20,7 +21,7 @@ class UpdateProfile(UserChangeForm):
             'last_name',
             'birth_date',
             'dni',
-            'cuit'
+            'cuit',
             'ciudad',
             'provincia',
             'zip_code',
