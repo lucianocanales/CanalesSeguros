@@ -32,7 +32,7 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
-    birth_date = models.DateField(
+    birth_date = models.DateTimeField(
         null=True,
         blank=True,
         verbose_name='Fecha de nacimiento'

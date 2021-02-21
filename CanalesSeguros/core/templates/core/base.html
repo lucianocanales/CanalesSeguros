@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +15,7 @@
   <link rel="stylesheet" href="{% static 'lib/AdminLTE/dist/css/adminlte.min.css' %}">
   <!-- CSS propio -->
   <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+  {% block header %} {% endblock %}
 </head>
 <body class="hold-transition  {% if user.is_authenticated %} sidebar-mini layout-navbar-fixed sidebar-collapse{% else %}layout-top-nav{% endif %}">
 <!-- Site wrapper -->
