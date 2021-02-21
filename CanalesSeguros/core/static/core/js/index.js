@@ -14,3 +14,4 @@ navbarSearchClear.addEventListener("click", function(){
    
     navbarSearchInput.value=""
 })
+

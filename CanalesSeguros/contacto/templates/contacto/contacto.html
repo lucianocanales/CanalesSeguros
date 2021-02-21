@@ -1,0 +1,84 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block title %} contactos {% endblock %}
+{% block name %} Contactos {% endblock %}
+{% block breadcrumb %}
+<li class="breadcrumb-item active" aria-current="page">Contacto</li>
+{% endblock %}
+
+{% block content %}
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+         {{ message }}
+          
+      </div>
+    {% endfor %}
+  {% endif %}
+    <div class="container-contact2">
+        <div class="wrap-contact2">
+            <form action="/contacto/" method="POST" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Ingrese el email" required>
+                    <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small>
+                    <div class="invalid-feedback">
+                        Por favor ingrese un email valido!
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="validationCustom01">Nombre</label>
+                    <input type="text" class="form-control" id="validationCustom01" placeholder="Nombre" name="nombre" required>
+                    <div class="invalid-feedback">
+                        Por favor ingrese su nombre!
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="validationCustom03">Asunto</label>
+                  <input type="text" class="form-control" id="validationCustom03" placeholder="Asunto" name="asunto" required>
+                  <div class="invalid-feedback">
+                      Por favor ingrese un asunto!
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="validationCustom02">Mensaje</label>
+                    <textarea class="form-control" id="validationCustom02" rows="3" name="mensaje" required></textarea>
+                    <div class="invalid-feedback">
+                        Por favor ingrese su un mensaja a enviar!
+                    </div>
+                </div>
+                <input id="enviar" type="submit" value="Enviar" class="btn btn-primary btn-lg btn-block">
+            </form>
+        </div>
+    </div>
+
+    {% block javascripts %}
+    <script>
+       
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+        </script>
+      {% endblock %}
+{% endblock %}

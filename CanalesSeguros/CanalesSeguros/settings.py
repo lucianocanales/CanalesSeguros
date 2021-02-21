@@ -17,7 +17,7 @@ from django.contrib import messages
 
 from decouple import config
 
-import core.db as db
+import core.db as Db
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     # apps
     'core',
     'login_app',
+    'legajo',
+    'legajo.legajo_profile',
+    'contacto',
 ]
 
 MIDDLEWARE = [
@@ -88,7 +91,7 @@ WSGI_APPLICATION = 'CanalesSeguros.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = db.POSTGRESQL
+DATABASES = Db.POSTGRESQL
 
 
 # Password validation
