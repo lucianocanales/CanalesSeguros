@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block breadcrumb %} 
+  <li class="breadcrumb-item active">{{title|capfirst}}</li>
+{% endblock %}
+{% block content %}
+  
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path(
-        'UpdateProfile/',
+        'UpdateProfile/<int:pk>/',
         views.UpdateProfileView.as_view(),
         name='updateProfile'
     ),
