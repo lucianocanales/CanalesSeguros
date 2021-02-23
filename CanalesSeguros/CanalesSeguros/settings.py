@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'login_app',
     'legajo',
     'legajo.legajo_profile',
+    'legajo.bienes',
     'contacto',
 ]
 

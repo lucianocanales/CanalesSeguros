@@ -22,5 +22,6 @@ urlpatterns = [
     path('', include('login_app.urls')),
     path('contacto/', include('contacto.urls')),
     path('perfil/', include('legajo.legajo_profile.urls')),
+    path('bienes/', include('legajo.bienes.urls')),
 
 ]
