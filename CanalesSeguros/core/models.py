@@ -32,6 +32,12 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
+    phone = models.CharField(
+        verbose_name='Numero de telefono',
+        max_length=14,
+        blank=True,
+        null=True
+    )
     birth_date = models.DateTimeField(
         null=True,
         blank=True,
@@ -40,11 +46,11 @@ class User(AbstractUser):
     avatar = StdImageField(
         variations={
             'medium': (350, 350),
-            'thumbnail': (100, 100),
+            'thumbnail': (100, 100, True),
         },
         delete_orphans=True,
         help_text='Tamaño recomendado 350 X 350',
-        upload_to='productos',
+        upload_to='Usuarios',
         null=True,
         blank=True
     )
