@@ -14,12 +14,7 @@ class UpdateProfile(UserChangeForm):
     class Meta:
         model = User
         widgets = {
-            'i_agree': CheckboxInput(
-                attrs={
-                    'checked': 'on',
-                    'id': 'checkboxSuccess1'
-                }
-            ),
+
 
             'phone': TextInput(
                 attrs={
