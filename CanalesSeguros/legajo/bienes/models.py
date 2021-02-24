@@ -1,20 +1,19 @@
 from django.db import models
 
 # Create your models here.
-tipo_bien = {
-    'auto': 'Auto',
-    'moto': 'Moto',
-    'camion': 'Camion',
-    'bicicleta': 'Bicicleta',
-    'telefono': 'Telefono',
-    'casa': 'Casa',
-    'negocio': 'Negocio',
-}
-usos_choices = {
-    'privado': 'Privado',
-    'comercial': 'Comercial',
-
-}
+tipo_bien = [
+    ('auto', 'Auto'),
+    ('moto', 'Moto'),
+    ('camion', 'Camion'),
+    ('bicicleta', 'Bicicleta'),
+    ('telefono', 'Telefono'),
+    ('casa', 'Casa'),
+    ('negocio', 'Negocio'),
+]
+usos_choices = [
+    ('privado', 'Privado'),
+    ('comercial', 'Comercial'),
+]
 
 
 class BienesPersonales(models.Model):
@@ -22,7 +21,9 @@ class BienesPersonales(models.Model):
     usuario_bien = models.ForeignKey(
         "core.User",
         verbose_name='Usuario',
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
 
     uso = models.CharField(
@@ -52,6 +53,52 @@ class Vehiculo(BienesPersonales):
 
     def __str__(self):
         return self.marca + ' ' + self.modelo
+
+
+class Accesorio(models.Model):
+
+    nombre = models.CharField(verbose_name='Nombre', max_length=50)
+
+    marca = models.CharField(
+        verbose_name='Marca',
+        max_length=50,
+        null=True,
+        blank=True,
+    )
+
+    modelo = models.CharField(
+        verbose_name='Modelo',
+        max_length=50,
+        null=True,
+        blank=True,
+    )
+
+    bien = models.ForeignKey(
+        BienesPersonales,
+        verbose_name='Bien Personal',
+        on_delete=models.CASCADE
+    )
+
+    serial_number = models.CharField(
+        verbose_name='Numero de serie',
+        max_length=100,
+        help_text='Si es que tiene',
+        null=True,
+        unique=True,
+        blank=True,
+    )
+
+    is_active = models.BooleanField(verbose_name="Borrar", default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now_add=True)
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.nombre + ' ' + self.serial_number
+
+    class Meta:
+        verbose_name = 'Accesorio'
+        verbose_name_plural = 'Accesorios'
 
 
 class Motorizados(Vehiculo):
@@ -87,3 +134,8 @@ class Telefono(BienesPersonales):
 
     def __str__(self):
         return self.marca + ' ' + self.modelo
+
+
+class Casa(BienesPersonales):
+    metros = models.IntegerField(verbose_name='Metros Cubiertos')
+    direccion = models.CharField(verbose_name='Direccion', max_length=100)
