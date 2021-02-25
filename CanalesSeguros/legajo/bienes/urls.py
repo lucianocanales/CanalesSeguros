@@ -8,5 +8,9 @@ urlpatterns = [
         views.BienesListView.as_view(),
         name='bienes'
     ),
-
+    path(
+        'crear_bici/',
+        views.BicicletaCreateView.as_view(),
+        name='create_bicicleta'
+    ),
 ]

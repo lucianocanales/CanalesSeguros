@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrumb %} 
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+  <li class="breadcrumb-item active">{{title|capfirst}}</li>
+{% endblock %}
+{% block header %} 
+{% endblock %}
+{% block content %}
+<form  method="POST" enctype="multipart/form-data" action=".">
+    {% csrf_token %}
+    <div >
+       {{form.as_p}} 
+        
+    </div>
+    
+    <input type="submit" class="btn btn-primary" value="Go Go Gadget &rarr;">
+    </form>
+    
+    
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}

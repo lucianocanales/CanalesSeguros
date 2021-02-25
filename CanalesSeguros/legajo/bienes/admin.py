@@ -33,3 +33,4 @@ class MotorizadosAdmin(admin.ModelAdmin):
 
 admin.site.register(Motorizados, MotorizadosAdmin)
 admin.site.register(Bicicleta, BisicletasAdmin)
+admin.site.register(Accesorio)
