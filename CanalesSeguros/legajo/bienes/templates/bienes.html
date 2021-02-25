@@ -19,9 +19,7 @@
   <link rel="stylesheet" href="{% static 'lib/AdminLTE/dist/css/adminlte.min.css' %}">
 {% endblock %}
 {% block content %}
-    <div class="card-header">
-        <h3 class="card-title">DataTable with default features</h3>
-    </div>
+    
     <!-- /.card-header -->
     <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
@@ -34,26 +32,71 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Trident</td>
-            <td>Internet
-            Explorer 4.0
-            </td>
-            <td>Win 95+</td>
+        {% for bien in vivienda %}
+          <tr>
+            <td>{{bien.direccion}}</td>
+            <td>{{bien.tipo}}</td>
+            <td>{{bien.uso}}</td>
             <td> 
                 <a class="btn bg-warning btn-xs">
                     <i class="fas fa-edit"></i>
                 </a>
                 <a class="btn bg-danger btn-xs">
                     <i class="fas fa-trash-alt"></i>
-                    
                 </a>
             </td>
-            
-        </tr>
-        
+          </tr>
+        {% endfor %}
+        {% for bien in telefono %}
+          <tr>
+            <td>{{bien.marca}} {{bien.modelo}}</td>
+            <td>{{bien.tipo}}</td>
+            <td>{{bien.uso}}</td>
+            <td> 
+                <a class="btn bg-warning btn-xs">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a class="btn bg-danger btn-xs">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+          </tr>
+        {% endfor %}
+        {% for bien in bicicleta %}
+          <tr>
+            <td>{{bien.marca}} {{bien.modelo}}</td>
+            <td>{{bien.tipo}}</td>
+            <td>{{bien.uso}}</td>
+            <td> 
+                <a class="btn bg-warning btn-xs">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a class="btn bg-danger btn-xs">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+          </tr>
+        {% endfor %}
+        {% for bien in vehiculo %}
+          <tr>
+            <td>{{bien.modelo}} {{bien.dominio}}</td>
+            <td>{{bien.tipo}}</td>
+            <td>{{bien.uso}}</td>
+            <td> 
+                <a class="btn bg-warning btn-xs">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a class="btn bg-danger btn-xs">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+          </tr>
+        {% endfor %}
         </tfoot>
         </table>
+        <a class="btn btn-app bg-success">
+          <i class="fas fa-plus"></i> Nuevo
+        </a>
     </div>
 {% endblock %}
 {% block javascripts %}
@@ -83,7 +126,7 @@
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
