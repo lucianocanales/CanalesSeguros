@@ -69,3 +69,4 @@ def BicicletaCreateView(request, id):
         "formset": formset,
     })
     # return render(request, 'create/create_bicicleta.html')
+# https://stackoverflow.com/questions/29758558/inlineformset-factory-create-new-objects-and-edit-objects-after-created
