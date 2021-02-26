@@ -12,11 +12,13 @@ class BisicletasAdmin(admin.ModelAdmin):
     inlines = [
         AccesoriosInline,
     ]
+    '''
     exclude = ['usuario_bien']
 
     def save_model(self, request, obj, form, change):
         obj.usuario_bien = request.user
         super().save_model(request, obj, form, change)
+    '''
 
 
 class MotorizadosAdmin(admin.ModelAdmin):
@@ -24,11 +26,13 @@ class MotorizadosAdmin(admin.ModelAdmin):
     inlines = [
         AccesoriosInline,
     ]
+    '''
     exclude = ['usuario_bien']
 
     def save_model(self, request, obj, form, change):
         obj.usuario_bien = request.user
         super().save_model(request, obj, form, change)
+    '''
 
 
 admin.site.register(Motorizados, MotorizadosAdmin)

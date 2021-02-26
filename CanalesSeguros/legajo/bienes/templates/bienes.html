@@ -68,10 +68,10 @@
             <td>{{bien.tipo}}</td>
             <td>{{bien.uso}}</td>
             <td> 
-                <a class="btn bg-warning btn-xs">
+                <a class="btn bg-warning btn-xs" href="{% url 'update_bicicleta' bien.id %}">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a class="btn bg-danger btn-xs">
+                <a class="btn bg-danger btn-xs" href="{% url 'delete_bici' bien.id %}">
                     <i class="fas fa-trash-alt"></i>
                 </a>
             </td>
@@ -104,7 +104,7 @@
         <a class="btn btn-app bg-primary">
           <i class="fas fa-truck-moving"></i> Nuevo camion
         </a>
-        <a class="btn btn-app bg-primary">
+        <a class="btn btn-app bg-primary" href="{% url 'create_bicicleta'%}">
           <i class="fas fa-bicycle"></i> Nueva bicicleta
         </a>
         <a class="btn btn-app bg-primary">

@@ -1,13 +1,14 @@
 # from django.shortcuts import render
 
-from django.shortcuts import redirect, render, HttpResponseRedirect, render_to_response
-from django.views.generic import ListView
-from core.models import User
+from django.shortcuts import redirect
+from django.views.generic import ListView, CreateView
+from django.views.generic import UpdateView
+from django.views.generic import DeleteView
 from .models import BienesPersonales, Motorizados, Bicicleta
 from .models import Telefono, Vivienda, Accesorio
-from .forms import AccesorioInline, BicicletaForm
+from .forms import BicicletaForm, AccesorioForm
+
 from django.urls import reverse_lazy
-from django.forms import inlineformset_factory
 # Create your views here.
 
 
@@ -35,38 +36,99 @@ class BienesListView(ListView):
         return context
 
 
-def BicicletaCreateView(request, id):
-    if id:
-        bici = Bicicleta.objects.get(pk=bici_id)
-    else:
-        bici = Bicicleta()
+class BicicletaCreateView(CreateView):
+    model = Bicicleta
+    template_name = "create/create_bicicleta.html"
+    form_class = BicicletaForm
+    success_url = reverse_lazy('bienes')
 
-    bici_form = BicicletaForm(instance=bici)
-    AccesorioInlineFormSet = inlineformset_factory(
-        Bicicleta,
-        Accesorio,
-        fields=('nombre', 'marca', 'modelo', 'serial_number'),
-        extra=2,
-        can_delete=False
-    )
-    formset = AccesorioInlineFormSet(isinstance=bici)
+    def dispatch(self, request, *args, **kwargs):
 
-    if request.method == "POST":
-        bici_form = BicicletaForm(request.POST)
-        if id:
-            bici_form = BicicletaForm(request.POST, instance=bici)
+        if self.request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('login')
 
-        if bici_form.is_valid():
-            created_bici = bici_form.save(commit=False)
-            formset = AccesorioInlineFormSet(
-                request.POST, request.FILES, isinstance=created_bici)
-            if formset.is_valid():
-                created_bici.save()
-                formset.save()
-                return HttpResponseRedirect(created_bici.get_absolute_url())
-    return render_to_response("create/create_bicicleta.html", {
-        "bici_form": bici_form,
-        "formset": formset,
-    })
-    # return render(request, 'create/create_bicicleta.html')
-# https://stackoverflow.com/questions/29758558/inlineformset-factory-create-new-objects-and-edit-objects-after-created
+    def form_valid(self, form):
+        app_model = form.save(commit=False)
+        app_model.usuario_bien = self.request.user
+        app_model.save()
+        return super().form_valid(form)
+
+
+class BicicletaUpdateView(UpdateView):
+    model = Bicicleta
+    template_name = "update/update_bici.html"
+    form_class = BicicletaForm
+    success_url = reverse_lazy('bienes')
+
+    def dispatch(self, request, *args, **kwargs):
+
+        if self.request.user.is_authenticated:
+            if Bicicleta.objects.filter(
+                    id=self.kwargs['pk']).exists():
+                owner = Bicicleta.objects.get(
+                    id=self.kwargs['pk']).usuario_bien
+                if owner == self.request.user:
+                    return super().dispatch(request, *args, **kwargs)
+                else:
+                    return redirect('bienes')
+            else:
+                return redirect('bienes')
+        else:
+            return redirect('login')
+
+    def form_valid(self, form):
+        app_model = form.save(commit=False)
+        app_model.usuario_bien = self.request.user
+        app_model.save()
+        return super().form_valid(form)
+
+
+class BicicletaDeleteView(DeleteView):
+    model = Bicicleta
+    template_name = "delete/delete_bici.html"
+    success_url = reverse_lazy('bienes')
+
+    def dispatch(self, request, *args, **kwargs):
+
+        if self.request.user.is_authenticated:
+            if Bicicleta.objects.filter(
+                    id=self.kwargs['pk']).exists():
+                owner = Bicicleta.objects.get(
+                    id=self.kwargs['pk']).usuario_bien
+                if owner == self.request.user:
+                    return super().dispatch(request, *args, **kwargs)
+                else:
+                    return redirect('bienes')
+            else:
+                return redirect('bienes')
+        else:
+            return redirect('login')
+
+
+class AccesorioCreateView(CreateView):
+    model = Accesorio
+    template_name = "create/create_accesorio.html"
+    form_class = AccesorioForm
+    success_url = reverse_lazy('bienes')
+
+    def dispatch(self, request, *args, **kwargs):
+
+        if self.request.user.is_authenticated:
+            if BienesPersonales.objects.filter(
+                    id=self.kwargs['pk']).exists():
+                owner = BienesPersonales.objects.get(
+                    id=self.kwargs['pk']).usuario_bien
+                if owner == self.request.user:
+                    return super().dispatch(request, *args, **kwargs)
+                else:
+                    return redirect('bienes')
+            else:
+                return redirect('bienes')
+        else:
+            return redirect('login')
+
+    def form_valid(self, form):
+        form.instance.bien_id = self.kwargs['pk']
+        return super().form_valid(form)

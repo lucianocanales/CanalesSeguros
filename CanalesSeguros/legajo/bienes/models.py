@@ -71,7 +71,9 @@ class Accesorio(models.Model):
     bien = models.ForeignKey(
         BienesPersonales,
         verbose_name='Bien Personal',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
 
     serial_number = models.CharField(
