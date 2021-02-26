@@ -10,7 +10,7 @@ urlpatterns = [
     ),
     path(
         'crear_bici/',
-        views.BicicletaCreateView.as_view(),
+        views.BicicletaCreateView,
         name='create_bicicleta'
     ),
 ]

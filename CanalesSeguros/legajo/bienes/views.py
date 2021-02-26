@@ -1,12 +1,13 @@
 # from django.shortcuts import render
-from django.shortcuts import redirect
-from django.views.generic import ListView, CreateView
-# from core.models import User
-from .models import BienesPersonales, Motorizados, Bicicleta
-from .models import Telefono, Vivienda
-from .forms import BicicletaForm, BicicletaInlineFormset
-from django.urls import reverse_lazy
 
+from django.shortcuts import redirect, render, HttpResponseRedirect, render_to_response
+from django.views.generic import ListView
+from core.models import User
+from .models import BienesPersonales, Motorizados, Bicicleta
+from .models import Telefono, Vivienda, Accesorio
+from .forms import AccesorioInline, BicicletaForm
+from django.urls import reverse_lazy
+from django.forms import inlineformset_factory
 # Create your views here.
 
 
@@ -34,8 +35,37 @@ class BienesListView(ListView):
         return context
 
 
-class BicicletaCreateView(CreateView):
-    model = Bicicleta
-    template_name = "create/create_bicicleta.html"
-    form_class = BicicletaForm
-    success_url = reverse_lazy('bienes')
+def BicicletaCreateView(request, id):
+    if id:
+        bici = Bicicleta.objects.get(pk=bici_id)
+    else:
+        bici = Bicicleta()
+
+    bici_form = BicicletaForm(instance=bici)
+    AccesorioInlineFormSet = inlineformset_factory(
+        Bicicleta,
+        Accesorio,
+        fields=('nombre', 'marca', 'modelo', 'serial_number'),
+        extra=2,
+        can_delete=False
+    )
+    formset = AccesorioInlineFormSet(isinstance=bici)
+
+    if request.method == "POST":
+        bici_form = BicicletaForm(request.POST)
+        if id:
+            bici_form = BicicletaForm(request.POST, instance=bici)
+
+        if bici_form.is_valid():
+            created_bici = bici_form.save(commit=False)
+            formset = AccesorioInlineFormSet(
+                request.POST, request.FILES, isinstance=created_bici)
+            if formset.is_valid():
+                created_bici.save()
+                formset.save()
+                return HttpResponseRedirect(created_bici.get_absolute_url())
+    return render_to_response("create/create_bicicleta.html", {
+        "bici_form": bici_form,
+        "formset": formset,
+    })
+    # return render(request, 'create/create_bicicleta.html')

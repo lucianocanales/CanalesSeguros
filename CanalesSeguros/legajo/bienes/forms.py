@@ -21,8 +21,8 @@ class BicicletaForm(forms.ModelForm):
 BicicletaInlineFormset = forms.inlineformset_factory(
     Bicicleta,
     Accesorio,
+    fields=('nombre', 'marca', 'modelo', 'serial_number'),
 
-    form=AccesorioInline,
     extra=2,
     can_delete=False
 )
