@@ -14,6 +14,11 @@ urlpatterns = [
         name='create_bicicleta'
     ),
     path(
+        'crear_vehiculo/<str:tipo>',
+        views.MotorizadosCreateView.as_view(),
+        name='crear_vehiculo'
+    ),
+    path(
         'update_bici/<int:pk>/',
         views.BicicletaUpdateView.as_view(),
         name='update_bicicleta'

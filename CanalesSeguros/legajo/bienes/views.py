@@ -6,7 +6,7 @@ from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from .models import BienesPersonales, Motorizados, Bicicleta
 from .models import Telefono, Vivienda, Accesorio
-from .forms import BicicletaForm, AccesorioForm
+from .forms import BicicletaForm, AccesorioForm, MotorizadosForm
 
 from django.urls import reverse_lazy
 # Create your views here.
@@ -105,6 +105,29 @@ class BicicletaDeleteView(DeleteView):
                 return redirect('bienes')
         else:
             return redirect('login')
+
+
+class MotorizadosCreateView(CreateView):
+    model = Motorizados
+    template_name = "create/create_Motorizados.html"
+    form_class = MotorizadosForm
+    success_url = reverse_lazy('bienes')
+
+    def dispatch(self, request, *args, **kwargs):
+        print(self.kwargs['tipo'])
+        if self.request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('login')
+
+    def form_valid(self, form):
+        tipos = ['auto', 'moto', 'camion']
+        app_model = form.save(commit=False)
+        app_model.usuario_bien = self.request.user
+        if self.kwargs['tipo'] in tipos:
+            app_model.tipo = self.kwargs['tipo']
+        app_model.save()
+        return super().form_valid(form)
 
 
 class AccesorioCreateView(CreateView):
