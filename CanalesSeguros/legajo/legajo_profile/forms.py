@@ -36,7 +36,10 @@ class UpdateProfile(UserChangeForm):
                 }
             ),
             'avatar':  FileInput(
-
+                attrs={
+                    'class': 'custom-file-input form-control',
+                    'id': "exampleInputFile",
+                }
             )
         }
 

@@ -34,7 +34,6 @@ class BienesPersonales(models.Model):
         default='privado'
     )
 
-    is_active = models.BooleanField(verbose_name="Borrar", default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
@@ -85,7 +84,6 @@ class Accesorio(models.Model):
         blank=True,
     )
 
-    is_active = models.BooleanField(verbose_name="Borrar", default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
