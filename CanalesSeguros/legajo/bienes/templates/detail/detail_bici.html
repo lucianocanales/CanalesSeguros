@@ -1,0 +1,32 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrumb %} 
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+  <li class="breadcrumb-item active">{{title|capfirst}}</li>
+{% endblock %}
+{% block header %} 
+{% endblock %}
+{% block content %}
+<ul>
+  <li>{{bicicleta.marca}}</li>
+  <li>{{bicicleta.modelo}}</li>
+  <li>{{bicicleta.uso}}</li>
+  <li>{{bicicleta.chasis}}</li>
+</ul>
+<h2>Accesorios</h2>
+{% for accesor in accesorios %}
+  <h3>{{accesor.nombre}}</h3>
+  <h4>Caracteristicas:</h4>
+  <ul>
+    <li>{{accesor.marca}}</li>
+    <li>{{accesor.modelo}}</li>
+    <li>{{accesor.serial_number}}</li>
+  </ul>
+{% endfor %}
+<a href="{% url 'crear_accesorio' bicicleta.id %}"><button type="button" class="btn btn-block btn-primary">Nuevo Accesorio</button></a>
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}

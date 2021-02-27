@@ -1,0 +1,32 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrumb %} 
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+  <li class="breadcrumb-item active">{{title|capfirst}}</li>
+{% endblock %}
+{% block header %} 
+{% endblock %}
+{% block content %}
+<ul>
+  <li>{{motorizados.marca}}</li>
+  <li>{{motorizados.modelo}}</li>
+  <li>{{motorizados.uso}}</li>
+  <li>{{motorizados.chasis}}</li>
+</ul>
+<h2>Accesorios</h2>
+{% for accesor in accesorios %}
+  <h3>{{accesor.nombre}}</h3>
+  <h4>Caracteristicas:</h4>
+  <ul>
+    <li>{{accesor.marca}}</li>
+    <li>{{accesor.modelo}}</li>
+    <li>{{accesor.serial_number}}</li>
+  </ul>
+{% endfor %}
+<a href="{% url 'crear_accesorio' motorizados.id %}"><button type="button" class="btn btn-block btn-primary">Nuevo Accesorio</button></a>
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}

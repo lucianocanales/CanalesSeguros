@@ -1,5 +1,5 @@
 from django import forms
-from .models import Bicicleta, Accesorio, Motorizados
+from .models import Bicicleta, Accesorio, Motorizados, Telefono, Vivienda
 
 
 class AccesorioForm(forms.ModelForm):
@@ -21,5 +21,19 @@ class BicicletaForm(forms.ModelForm):
 class MotorizadosForm(forms.ModelForm):
     class Meta:
         model = Motorizados
+        fields = '__all__'
+        exclude = ('usuario_bien', 'tipo')
+
+
+class TelefonoForm(forms.ModelForm):
+    class Meta:
+        model = Telefono
+        fields = '__all__'
+        exclude = ('usuario_bien', 'tipo')
+
+
+class ViviendaForm(forms.ModelForm):
+    class Meta:
+        model = Vivienda
         fields = '__all__'
         exclude = ('usuario_bien', 'tipo')

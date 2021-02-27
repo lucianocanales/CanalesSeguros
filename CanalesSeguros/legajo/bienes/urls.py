@@ -6,31 +6,106 @@ urlpatterns = [
     path(
         '',
         views.BienesListView.as_view(),
-        name='bienes'
+        name='bienes',
     ),
+    #############################################
+    # urls de bicicletas
+    #############################################
     path(
-        'crear_bici/',
+        'bici/create/',
         views.BicicletaCreateView.as_view(),
-        name='create_bicicleta'
+        name='create_bicicleta',
     ),
     path(
-        'crear_vehiculo/<str:tipo>',
-        views.MotorizadosCreateView.as_view(),
-        name='crear_vehiculo'
-    ),
-    path(
-        'update_bici/<int:pk>/',
+        'bici/update/<int:pk>/',
         views.BicicletaUpdateView.as_view(),
-        name='update_bicicleta'
+        name='update_bicicleta',
     ),
     path(
-        'delete_bici/<int:pk>/',
+        'bici/delete/<int:pk>/',
         views.BicicletaDeleteView.as_view(),
-        name='delete_bici'
+        name='delete_bici',
     ),
     path(
-        'crear_accesorio/<int:pk>/',
+        'bici/detail/<int:pk>/',
+        views.BicicletaDetailView.as_view(),
+        name='detail_bici',
+    ),
+    #############################################
+    # urls de vehiculos
+    #############################################
+    path(
+        'vehiculo/create/<str:tipo>/',
+        views.MotorizadosCreateView.as_view(),
+        name='crear_vehiculo',
+    ),
+    path(
+        'vehiculo/update/<int:pk>/',
+        views.MotorizadosUpdateView.as_view(),
+        name='update_vehiculo',
+    ),
+    path(
+        'vehiculo/delete/<int:pk>/',
+        views.MotorizadosDeleteView.as_view(),
+        name='delete_vehiculo',
+    ),
+    path(
+        'vehiculo/detail/<int:pk>/',
+        views.MotorizadosDetailView.as_view(),
+        name='detail_vehiculo',
+    ),
+    #############################################
+    # urls de telefono
+    #############################################
+    path(
+        'telefono/create/',
+        views.TelefonoCreateView.as_view(),
+        name='create_telefono',
+    ),
+    path(
+        'telefono/update/<int:pk>/',
+        views.TelefonoUpdateView.as_view(),
+        name='update_telefono',
+    ),
+    path(
+        'telefono/delete/<int:pk>/',
+        views.TelefonoDeleteView.as_view(),
+        name='delete_telefono',
+    ),
+    path(
+        'telefono/detail/<int:pk>/',
+        views.TelefonoDetailView.as_view(),
+        name='detail_telefono',
+    ),
+    #############################################
+    # urls de viviendas
+    #############################################
+    path(
+        'vivienda/create/<str:tipo>/',
+        views.ViviendaCreateView.as_view(),
+        name='crear_vivienda',
+    ),
+    path(
+        'vivienda/update/<int:pk>/',
+        views.ViviendaUpdateView.as_view(),
+        name='update_vivienda',
+    ),
+    path(
+        'vivienda/delete/<int:pk>/',
+        views.ViviendaDeleteView.as_view(),
+        name='delete_vivienda',
+    ),
+    path(
+        'vivienda/detail/<int:pk>/',
+        views.ViviendaDetailView.as_view(),
+        name='detail_vivienda',
+    ),
+    #############################################
+    # urls de Accesorios
+    #############################################
+    path(
+        'accesorio/create/<int:pk>/',
         views.AccesorioCreateView.as_view(),
-        name='crear_accesorio'
+        name='crear_accesorio',
     ),
 ]

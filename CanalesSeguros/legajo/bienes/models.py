@@ -138,8 +138,9 @@ class Telefono(BienesPersonales):
     )
     marca = models.CharField(verbose_name="Marca", max_length=50)
     modelo = models.CharField(verbose_name="Modelo", max_length=50)
-    IME = models.CharField(verbose_name="Marca", max_length=50)
-    caracteristicas = models.TextField(verbose_name='Caracteristicas')
+    IME = models.CharField(verbose_name="IME", max_length=50)
+    caracteristicas = models.TextField(
+        verbose_name='Caracteristicas', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Telefono'

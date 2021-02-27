@@ -34,14 +34,14 @@
         <tbody>
         {% for bien in vivienda %}
           <tr>
-            <td><a href="#">{{bien.direccion}}</a></td>
+            <td><a href="{% url 'detail_vivienda' bien.id %}">{{bien.direccion}}</a></td>
             <td>{{bien.tipo}}</td>
             <td>{{bien.uso}}</td>
             <td> 
-                <a class="btn bg-warning btn-xs">
+                <a class="btn bg-warning btn-xs"  href="{% url 'update_vivienda' bien.id %}">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a class="btn bg-danger btn-xs">
+                <a class="btn bg-danger btn-xs"  href="{% url 'delete_vivienda' bien.id %}">
                     <i class="fas fa-trash-alt"></i>
                 </a>
             </td>
@@ -49,14 +49,14 @@
         {% endfor %}
         {% for bien in telefono %}
           <tr>
-            <td><a href="#">{{bien.marca}} {{bien.modelo}}</a></td>
+            <td><a href="{% url 'detail_telefono' bien.id %}">{{bien.marca}} - {{bien.modelo}}</a></td>
             <td>{{bien.tipo}}</td>
             <td>{{bien.uso}}</td>
             <td> 
-                <a class="btn bg-warning btn-xs">
+                <a class="btn bg-warning btn-xs" href="{% url 'update_telefono' bien.id %}">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a class="btn bg-danger btn-xs">
+                <a class="btn bg-danger btn-xs"  href="{% url 'delete_telefono' bien.id %}">
                     <i class="fas fa-trash-alt"></i>
                 </a>
             </td>
@@ -65,7 +65,7 @@
         {% for bien in bicicleta %}
         
           <tr>
-            <td><a href="#">{{bien.marca}} {{bien.modelo}}</a></td>
+            <td><a href="{% url 'detail_bici' bien.id %}">{{bien.marca}} - {{bien.modelo}}</a></td>
             <td>{{bien.tipo}}</td>
             <td>{{bien.uso}}</td>
             <td> 
@@ -81,14 +81,14 @@
         {% endfor %}
         {% for bien in vehiculo %}
           <tr>
-            <td><a href="#">{{bien.modelo}} {{bien.dominio}}</a></td>
+            <td><a href="{% url 'detail_vehiculo' bien.id %}">{{bien.marca}} - {{bien.modelo}} - {{bien.dominio}}</a></td>
             <td>{{bien.tipo}}</td>
             <td>{{bien.uso}}</td>
             <td> 
-                <a class="btn bg-warning btn-xs">
+                <a class="btn bg-warning btn-xs" href="{% url 'update_vehiculo' bien.id %}">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a class="btn bg-danger btn-xs">
+                <a class="btn bg-danger btn-xs" href="{% url 'delete_vehiculo' bien.id %}">
                     <i class="fas fa-trash-alt"></i>
                 </a>
             </td>
@@ -97,25 +97,25 @@
         </tfoot>
         </table>
         <div class="card-footer text-center">
-        <a class="btn btn-app bg-primary">
+        <a class="btn btn-app bg-primary" href="{% url 'crear_vehiculo' 'auto' %}">
           <i class="fas fa-car"></i> Nuevo auto
         </a>
         <a class="btn btn-app bg-primary" href="{% url 'crear_vehiculo' 'moto' %}">
           <i class="fas fa-motorcycle"></i> Nueva moto 
         </a>
-        <a class="btn btn-app bg-primary">
+        <a class="btn btn-app bg-primary" href="{% url 'crear_vehiculo' 'camion' %}">
           <i class="fas fa-truck-moving"></i> Nuevo camion
         </a>
         <a class="btn btn-app bg-primary" href="{% url 'create_bicicleta'%}">
           <i class="fas fa-bicycle"></i> Nueva bicicleta
         </a>
-        <a class="btn btn-app bg-primary">
+        <a class="btn btn-app bg-primary"  href="{% url 'create_telefono'%}">
           <i class="fas fa-mobile-alt"></i> Nuevo telefono
         </a>
-        <a class="btn btn-app bg-primary">
+        <a class="btn btn-app bg-primary" href="{% url 'crear_vivienda' 'casa' %}">
           <i class="fas fa-home"></i> Nuevo vivienda
         </a>
-        <a class="btn btn-app bg-primary">
+        <a class="btn btn-app bg-primary" href="{% url 'crear_vivienda' 'negocio' %}">
           <i class="fas fa-store-alt"></i> Nuevo negocio
         </a>
       </div>

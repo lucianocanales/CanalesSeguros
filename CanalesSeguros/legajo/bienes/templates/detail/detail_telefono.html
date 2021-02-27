@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrumb %} 
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+  <li class="breadcrumb-item active">{{title|capfirst}}</li>
+{% endblock %}
+{% block header %} 
+{% endblock %}
+{% block content %}
+<ul>
+  <li>{{telefono.marca}}</li>
+  <li>{{telefono.modelo}}</li>
+  <li>{{telefono.IME}}</li>
+  {% if telefono.caracteristicas %}<li>{{telefono.caracteristicas}}</li>{% endif %}
+  
+</ul>
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}
