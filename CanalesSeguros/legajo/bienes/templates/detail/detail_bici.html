@@ -4,6 +4,7 @@
 
 {% block breadcrumb %} 
   <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'bienes' %}">Bienes Personales</a></li>
   <li class="breadcrumb-item active">{{title|capfirst}}</li>
 {% endblock %}
 {% block header %} 
@@ -43,13 +44,14 @@
         <h4>Poliza asociadas al bien personal</h4>
           <div class="post">
             <div class="user-block">
-              <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+              <img class="img-circle img-bordered-sm" src="{% static 'core/img/rivadavia.jpg' %}" alt="user image">
               <span class="username">
                 <a href="#">Seguros Rivadavia</a>
               </span>
               <span class="description">desde 20/3/20 - hasta 20/3/21</span>
             </div>
             <!-- /.user-block -->
+            <h5>Detalle de la poliza</h5>
             <p>
               Lorem ipsum represents a long-held tradition for designers,
               typographers and the like. Some people hate it and argue for
@@ -67,60 +69,64 @@
     </div>
   </div>
   <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-    <h3 class="text-primary"><i class="fas fa-paint-brush"></i>{{bicicleta.marca}} - {{bicicleta.modelo}}</h3>
-    <p class="text-muted">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</p>
-    <br>
+    <h3 class="text-primary"><i class="fas fa-bicycle"></i> {{bicicleta.marca}} - {{bicicleta.modelo}}</h3>
     <div class="text-muted">
-      <p class="text-sm">Client Company
-        <b class="d-block">Deveint Inc</b>
+      <p class="text-sm">Marca
+        <b class="d-block">{{bicicleta.marca}}</b>
       </p>
-      <p class="text-sm">Project Leader
-        <b class="d-block">Tony Chicken</b>
+      <p class="text-sm">Modelo
+        <b class="d-block">{{bicicleta.modelo}}</b>
+      </p>
+      <p class="text-sm">Uso
+        <b class="d-block">{{bicicleta.uso}}</b>
+      </p>
+      <p class="text-sm">Numero de chasis
+        <b class="d-block">{{bicicleta.chasis}}</b>
       </p>
     </div>
-
-    <h5 class="mt-5 text-muted">Project files</h5>
-    <ul class="list-unstyled">
-      <li>
-        <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>
-      </li>
-      <li>
-        <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>
-      </li>
-      <li>
-        <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-envelope"></i> Email-from-flatbal.mln</a>
-      </li>
-      <li>
-        <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Logo.png</a>
-      </li>
-      <li>
-        <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Contract-10_12_2014.docx</a>
-      </li>
-    </ul>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title text-muted">Accesorios</h5>
+      </div>
+      <div class="card-body">
+        <div id="accordion">
+          {% for accesor in accesorios %}
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4 class="card-title w-100">
+                  <a class="d-block w-100" data-toggle="collapse" href="#collapse{{accesor.id}}">
+                    {{accesor.nombre}}
+                  </a>
+                </h4>
+              </div>
+              <div id="collapse{{accesor.id}}" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="text-muted">
+                    <p class="text-sm">Marca
+                      <b class="d-block">{{accesor.marca}}</b>
+                    </p>
+                    <p class="text-sm">Modelo
+                      <b class="d-block">{{accesor.modelo}}</b>
+                    </p>
+                    {% if accesor.serial_number %}
+                      <p class="text-sm">Numero de serie
+                        <b class="d-block">{{accesor.serial_number}}</b>
+                      </p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
     <div class="text-center mt-5 mb-3">
-      <a href="{% url 'crear_accesorio' bicicleta.id %}" class="btn btn-sm btn-primary">Agregar Accesorio</a>
-      <a href="{% url 'update_bicicleta' bicicleta.id %}" class="btn btn-sm btn-warning">Editar Bicicleta</a>
+      <a href="{% url 'crear_accesorio' bicicleta.id %}" class="btn btn-sm btn-primary"><i class="fas fa-plus-square"></i>  Agregar Accesorio</a>
+      <a href="{% url 'update_bicicleta' bicicleta.id %}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editar Bicicleta </a>
     </div>
   </div>
 </div>
-      
-<ul>
-  <li>{{bicicleta.marca}}</li>
-  <li>{{bicicleta.modelo}}</li>
-  <li>{{bicicleta.uso}}</li>
-  <li>{{bicicleta.chasis}}</li>
-</ul>
-<h2>Accesorios</h2>
-{% for accesor in accesorios %}
-  <h3>{{accesor.nombre}}</h3>
-  <h4>Caracteristicas:</h4>
-  <ul>
-    <li>{{accesor.marca}}</li>
-    <li>{{accesor.modelo}}</li>
-    <li>{{accesor.serial_number}}</li>
-  </ul>
-{% endfor %}
-<a href="{% url 'crear_accesorio' bicicleta.id %}"><button type="button" class="btn btn-block btn-primary">Nuevo Accesorio</button></a>
 {% endblock %}
 {% block javascripts %}
 

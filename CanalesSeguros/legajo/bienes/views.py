@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView, DetailView
+from localflavor.ar.ar_provinces import PROVINCE_CHOICES
 
 from .models import BienesPersonales, Motorizados, Bicicleta
 from .models import Telefono, Vivienda, Accesorio
@@ -148,8 +149,7 @@ class BicicletaDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        marca = Bicicleta.objects.get(id=self.kwargs['pk']).marca
-        modelo = Bicicleta.objects.get(id=self.kwargs['pk']).modelo
+
         context['title'] = 'Detalle del bien Personal'
         context["accesorios"] = Accesorio.objects.filter(
             bien_id=self.kwargs['pk'])
@@ -279,6 +279,13 @@ class MotorizadosDetailView(DetailView):
         context['title'] = marca + ' - ' + modelo + ' - ' + dominio
         context["accesorios"] = Accesorio.objects.filter(
             bien_id=self.kwargs['pk'])
+        tipo = Motorizados.objects.get(id=self.kwargs['pk']).tipo
+        if tipo == 'auto':
+            context["tipoIcon"] = 'fa-car'
+        elif tipo == 'moto':
+            context["tipoIcon"] = 'fa-motorcycle'
+        elif tipo == 'camion':
+            context["tipoIcon"] = 'fa-truck-moving'
         return context
 
 #############################################
@@ -523,6 +530,21 @@ class ViviendaDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         direccion = Vivienda.objects.get(id=self.kwargs['pk']).direccion
         context['title'] = direccion
+        for provinca in PROVINCE_CHOICES:
+            vivienda_prvincia = Vivienda.objects.get(
+                id=self.kwargs['pk']).provicia
+            if vivienda_prvincia.upper() == provinca[0]:
+                context['provincia_completo'] = provinca[1]
+        tipo = Vivienda.objects.get(id=self.kwargs['pk']).tipo
+        if tipo == 'depto en 3er piso o superior':
+            context['tipoIcon'] = 'fa-building'
+        elif tipo == 'casa' or tipo == 'barrio privado':
+            context['tipoIcon'] = 'fa-home'
+        elif tipo == 'casa de finde':
+            context['tipoIcon'] = 'fa-umbrella-beach'
+        elif tipo == 'negocio':
+            context['tipoIcon'] = 'fa-store-alt'
+
         return context
 
 #############################################

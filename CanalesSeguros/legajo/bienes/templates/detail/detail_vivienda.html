@@ -4,28 +4,136 @@
 
 {% block breadcrumb %} 
   <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'bienes' %}">Bienes Personales</a></li>
   <li class="breadcrumb-item active">{{title|capfirst}}</li>
 {% endblock %}
 {% block header %} 
 {% endblock %}
 {% block content %}
-<ul>
-  <li>{{vivienda.direccion}}</li>
-  <li>{{vivienda.metros}}</li>
-  <li>{{vivienda.uso}}</li>
-  <li>{{vivienda.tipo}}</li>
-</ul>
-<h2>Objetos</h2>
-{% for accesor in accesorios %}
-  <h3>{{accesor.nombre}}</h3>
-  <h4>Caracteristicas:</h4>
-  <ul>
-    <li>{{accesor.marca}}</li>
-    <li>{{accesor.modelo}}</li>
-    <li>{{accesor.serial_number}}</li>
-  </ul>
-{% endfor %}
-<a href="{% url 'crear_accesorio' vivienda.id %}"><button type="button" class="btn btn-block btn-primary">Nuevo Objeto</button></a>
+
+<div class="row">
+  <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+    <div class="row">
+      <div class="col-12 col-sm-4">
+        <div class="info-box bg-light">
+          <div class="info-box-content">
+            <span class="info-box-text text-center text-muted">Valor cubierto</span>
+            <span class="info-box-number text-center text-muted mb-0">{{vivienda.valor}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-4">
+        <div class="info-box bg-light">
+          <div class="info-box-content">
+            <span class="info-box-text text-center text-muted">Valor de la cuota</span>
+            <span class="info-box-number text-center text-muted mb-0">2000</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-4">
+        <div class="info-box bg-light">
+          <div class="info-box-content">
+            <span class="info-box-text text-center text-muted">Proximo vencimiento</span>
+            <span class="info-box-number text-center text-muted mb-0">20/3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h4>Poliza asociadas al bien personal</h4>
+          <div class="post">
+            <div class="user-block">
+              <img class="img-circle img-bordered-sm" src="{% static 'core/img/rivadavia.jpg' %}" alt="user image">
+              <span class="username">
+                <a href="#">Seguros Rivadavia</a>
+              </span>
+              <span class="description">desde 20/3/20 - hasta 20/3/21</span>
+            </div>
+            <!-- /.user-block -->
+            <h5>Detalle de la poliza</h5>
+            <p>
+              Lorem ipsum represents a long-held tradition for designers,
+              typographers and the like. Some people hate it and argue for
+              its demise, but others ignore.
+            </p>
+
+            <p>
+              <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Comprobante de Poliza</a>
+            </p>
+            <p>
+              <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Cupones de pagao</a>
+            </p>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+    <h3 class="text-primary"><i class="fas {{tipoIcon}}"></i> {{vivienda.ciudad}} - {{vivienda.direccion}}</h3>
+    <h5>{{vivienda.tipo|capfirst}}</h5>
+    <div class="text-muted">
+      <p class="text-sm">Provincia
+        <b class="d-block">{{provincia_completo}}</b>
+      </p>
+      <p class="text-sm">Ciudad
+        <b class="d-block">{{vivienda.ciudad}}</b>
+      </p>
+      <p class="text-sm">Direccion
+        <b class="d-block">{{vivienda.direccion}}</b>
+      </p>
+      <p class="text-sm">Codigo postal
+        <b class="d-block">{{vivienda.zip_code}}</b>
+      </p>
+      <p class="text-sm">Superficie
+        <b class="d-block">{{vivienda.metros}}</b>
+      </p>
+      <p class="text-sm">Uso
+        <b class="d-block">{{vivienda.uso}}</b>
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title text-muted">Objetos</h5>
+      </div>
+      <div class="card-body">
+        <div id="accordion">
+          {% for accesor in accesorios %}
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4 class="card-title w-100">
+                  <a class="d-block w-100" data-toggle="collapse" href="#collapse{{accesor.id}}">
+                    {{accesor.nombre}}
+                  </a>
+                </h4>
+              </div>
+              <div id="collapse{{accesor.id}}" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="text-muted">
+                    <p class="text-sm">Marca
+                      <b class="d-block">{{accesor.marca}}</b>
+                    </p>
+                    <p class="text-sm">Modelo
+                      <b class="d-block">{{accesor.modelo}}</b>
+                    </p>
+                    {% if accesor.serial_number %}
+                      <p class="text-sm">Numero de serie
+                        <b class="d-block">{{accesor.serial_number}}</b>
+                      </p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5 mb-3">
+      <a href="{% url 'crear_accesorio' vivienda.id %}" class="btn btn-sm btn-primary"><i class="fas fa-plus-square"></i>  Agregar Objeto</a>
+      <a href="{% url 'update_vivienda' vivienda.id %}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editar vivienda </a>
+    </div>
+  </div>
+</div>
 {% endblock %}
 {% block javascripts %}
 

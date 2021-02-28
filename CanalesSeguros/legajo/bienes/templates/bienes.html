@@ -34,7 +34,7 @@
         <tbody>
         {% for bien in vivienda %}
           <tr>
-            <td><a href="{% url 'detail_vivienda' bien.id %}">{{bien.direccion}}</a></td>
+            <td><a class="btn-link text-secondary" href="{% url 'detail_vivienda' bien.id %}">{{bien.direccion}}</a></td>
             <td>{{bien.tipo}}</td>
             <td>{{bien.uso}}</td>
             <td> 
@@ -49,7 +49,7 @@
         {% endfor %}
         {% for bien in telefono %}
           <tr>
-            <td><a href="{% url 'detail_telefono' bien.id %}">{{bien.marca}} - {{bien.modelo}}</a></td>
+            <td><a class="btn-link text-secondary" href="{% url 'detail_telefono' bien.id %}">{{bien.marca}} - {{bien.modelo}}</a></td>
             <td>{{bien.tipo}}</td>
             <td>{{bien.uso}}</td>
             <td> 
@@ -65,7 +65,7 @@
         {% for bien in bicicleta %}
         
           <tr>
-            <td><a href="{% url 'detail_bici' bien.id %}">{{bien.marca}} - {{bien.modelo}}</a></td>
+            <td><a class="btn-link text-secondary" href="{% url 'detail_bici' bien.id %}">{{bien.marca}} - {{bien.modelo}}</a></td>
             <td>{{bien.tipo}}</td>
             <td>{{bien.uso}}</td>
             <td> 
@@ -81,7 +81,7 @@
         {% endfor %}
         {% for bien in vehiculo %}
           <tr>
-            <td><a href="{% url 'detail_vehiculo' bien.id %}">{{bien.marca}} - {{bien.modelo}} - {{bien.dominio}}</a></td>
+            <td><a class="btn-link text-secondary" href="{% url 'detail_vehiculo' bien.id %}">{{bien.marca}} - {{bien.modelo}} - {{bien.dominio}}</a></td>
             <td>{{bien.tipo}}</td>
             <td>{{bien.uso}}</td>
             <td> 
