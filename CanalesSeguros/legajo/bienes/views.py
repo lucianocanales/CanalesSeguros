@@ -150,7 +150,7 @@ class BicicletaDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         marca = Bicicleta.objects.get(id=self.kwargs['pk']).marca
         modelo = Bicicleta.objects.get(id=self.kwargs['pk']).modelo
-        context['title'] = marca + ' - ' + modelo
+        context['title'] = 'Detalle del bien Personal'
         context["accesorios"] = Accesorio.objects.filter(
             bien_id=self.kwargs['pk'])
         return context
@@ -426,9 +426,12 @@ class ViviendaCreateView(CreateView):
 
         app_model = form.save(commit=False)
         app_model.usuario_bien = self.request.user
-        app_model.tipo = self.kwargs['tipo']
+
         if self.kwargs['tipo'] == 'negocio':
             app_model.uso = 'comercial'
+            app_model.tipo = 'negocio'
+        else:
+            app_model.uso = 'privado'
         app_model.save()
         return super().form_valid(form)
 

@@ -1,4 +1,6 @@
 from django.db import models
+from localflavor.ar.ar_provinces import PROVINCE_CHOICES
+import datetime
 
 # Create your models here.
 
@@ -8,7 +10,10 @@ tipo_motorizado = [
     ('camion', 'Camion'),
 ]
 tipo_vivienda = [
-    ('casa', 'Casa'),
+    ('depto en 3er piso o superior', 'Depto en 3er piso o superior'),
+    ('casa', 'Casa o Depto en planta baja, 1er, 2do piso'),
+    ('barrio privado', 'Barrio Privado'),
+    ('casa de finde', 'Casa de fin de semana (no en barrio privado)'),
     ('negocio', 'Negocio'),
 ]
 usos_choices = [
@@ -18,7 +23,7 @@ usos_choices = [
 
 
 class BienesPersonales(models.Model):
-
+    valor = models.IntegerField(verbose_name='Valor', default=0)
     usuario_bien = models.ForeignKey(
         "core.User",
         verbose_name='Usuario',
@@ -83,6 +88,7 @@ class Accesorio(models.Model):
         unique=True,
         blank=True,
     )
+    valor = models.IntegerField(verbose_name='Valor', default=0)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
@@ -97,12 +103,17 @@ class Accesorio(models.Model):
 
 
 class Motorizados(Vehiculo):
+    YEAR_CHOICES = []
+    for r in range(1970, (datetime.datetime.now().year+1)):
+        YEAR_CHOICES.append((r, r))
     tipo = models.CharField(
         verbose_name='tipo',
         max_length=50,
         choices=tipo_motorizado,
         default='auto'
     )
+    year = models.PositiveIntegerField(
+        verbose_name='Año', choices=YEAR_CHOICES)
     dominio = models.CharField(verbose_name='patente', max_length=7)
     motor = models.CharField(verbose_name='Numero de motor', max_length=50)
     titular = models.CharField(verbose_name='titular', max_length=150)
@@ -152,12 +163,20 @@ class Telefono(BienesPersonales):
 
 class Vivienda(BienesPersonales):
     tipo = models.CharField(
-        verbose_name='tipo',
+        verbose_name='tipo de vivenda',
         max_length=50,
         default='casa',
         choices=tipo_vivienda
     )
-    metros = models.IntegerField(verbose_name='Metros Cubiertos')
+
+    metros = models.IntegerField(verbose_name='Superficie')
+    zip_code = models.IntegerField(verbose_name='Codigo Postal')
+    ciudad = models.CharField(verbose_name='Ciudad', max_length=50)
+    provicia = models.CharField(
+        verbose_name='Provincia',
+        max_length=50,
+        choices=PROVINCE_CHOICES,
+    )
     direccion = models.CharField(verbose_name='Direccion', max_length=100)
 
     class Meta:
