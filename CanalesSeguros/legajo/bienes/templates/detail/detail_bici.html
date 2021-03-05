@@ -122,8 +122,8 @@
       </div>
     </div>
     <div class="text-center mt-5 mb-3">
-      <a href="{% url 'crear_accesorio' bicicleta.id %}" class="btn btn-sm btn-primary"><i class="fas fa-plus-square"></i>  Agregar Accesorio</a>
-      <a href="{% url 'update_bicicleta' bicicleta.id %}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editar Bicicleta </a>
+      <a href="{% url 'crear_accesorio' bicicleta.id %}?next={{ request.path|urlencode }}" class="btn btn-sm btn-primary"><i class="fas fa-plus-square"></i>  Agregar Accesorio</a>
+      <a href="{% url 'update_bicicleta' bicicleta.id %}?next={{ request.path|urlencode }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editar Bicicleta </a>
     </div>
   </div>
 </div>

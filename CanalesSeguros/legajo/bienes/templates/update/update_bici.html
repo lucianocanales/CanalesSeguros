@@ -13,6 +13,7 @@
     {% csrf_token %}
     
     <div >
+      <input type="hidden" name="next" value="{{ request.GET.next }}">
        {{form.as_p}} 
        
         

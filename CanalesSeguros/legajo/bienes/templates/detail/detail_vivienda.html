@@ -129,8 +129,8 @@
       </div>
     </div>
     <div class="text-center mt-5 mb-3">
-      <a href="{% url 'crear_accesorio' vivienda.id %}" class="btn btn-sm btn-primary"><i class="fas fa-plus-square"></i>  Agregar Objeto</a>
-      <a href="{% url 'update_vivienda' vivienda.id %}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editar vivienda </a>
+      <a href="{% url 'crear_accesorio' vivienda.id %}?next={{ request.path|urlencode }}" class="btn btn-sm btn-primary"><i class="fas fa-plus-square"></i>  Agregar Objeto</a>
+      <a href="{% url 'update_vivienda' vivienda.id %}?next={{ request.path|urlencode }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editar vivienda </a>
     </div>
   </div>
 </div>

@@ -1,6 +1,8 @@
 
+from django.http.response import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from django.urls.base import reverse
 from django.views.generic import ListView, CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView, DetailView
@@ -86,6 +88,10 @@ class BicicletaUpdateView(UpdateView):
                 return redirect('bienes')
         else:
             return redirect('login')
+
+    def get_success_url(self):
+        next = self.request.POST.get('next', reverse('bienes'))
+        return next
 
     def form_valid(self, form):
         app_model = form.save(commit=False)
@@ -214,6 +220,10 @@ class MotorizadosUpdateView(UpdateView):
         else:
             return redirect('login')
 
+    def get_success_url(self):
+        next = self.request.POST.get('next', reverse('bienes'))
+        return next
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         tipe = Motorizados.objects.get(
@@ -339,6 +349,10 @@ class TelefonoUpdateView(UpdateView):
                 return redirect('bienes')
         else:
             return redirect('login')
+
+    def get_success_url(self):
+        next = self.request.POST.get('next', reverse('bienes'))
+        return next
 
     def form_valid(self, form):
         app_model = form.save(commit=False)
@@ -469,6 +483,10 @@ class ViviendaUpdateView(UpdateView):
         else:
             return redirect('login')
 
+    def get_success_url(self):
+        next = self.request.POST.get('next', reverse('bienes'))
+        return next
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         tipe = Vivienda.objects.get(
@@ -530,6 +548,8 @@ class ViviendaDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         direccion = Vivienda.objects.get(id=self.kwargs['pk']).direccion
         context['title'] = direccion
+        context["accesorios"] = Accesorio.objects.filter(
+            bien_id=self.kwargs['pk'])
         for provinca in PROVINCE_CHOICES:
             vivienda_prvincia = Vivienda.objects.get(
                 id=self.kwargs['pk']).provicia
@@ -573,6 +593,10 @@ class AccesorioCreateView(CreateView):
                 return redirect('bienes')
         else:
             return redirect('login')
+
+    def get_success_url(self):
+        next = self.request.POST.get('next', reverse('bienes'))
+        return next
 
     def form_valid(self, form):
         form.instance.bien_id = self.kwargs['pk']

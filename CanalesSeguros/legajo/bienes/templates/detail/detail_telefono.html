@@ -91,7 +91,7 @@
     
     <div class="text-center mt-5 mb-3">
       
-      <a href="{% url 'update_telefono' telefono.id %}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editar Telefono </a>
+      <a href="{% url 'update_telefono' telefono.id %}?next={{ request.path|urlencode }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editar Telefono </a>
     </div>
   </div>
 </div>
