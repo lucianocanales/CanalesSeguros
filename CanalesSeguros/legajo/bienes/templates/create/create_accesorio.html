@@ -11,13 +11,15 @@
 {% block content %}
 <form  method="POST" enctype="multipart/form-data" action=".">
     {% csrf_token %}
-    
     <div >
       <input type="hidden" name="next" value="{{ request.GET.next }}">
+    </div>
+
+    
       {{form.as_p}} 
        
         
-    </div>
+    
     
     <input type="submit" class="btn btn-primary" value="Go Go Gadget &rarr;">
     </form>

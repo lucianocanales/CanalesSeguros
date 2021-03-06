@@ -6,7 +6,7 @@ from django.urls.base import reverse
 from django.views.generic import ListView, CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView, DetailView
-from localflavor.ar.ar_provinces import PROVINCE_CHOICES
+
 
 from .models import BienesPersonales, Motorizados, Bicicleta
 from .models import Telefono, Vivienda, Accesorio
@@ -550,11 +550,6 @@ class ViviendaDetailView(DetailView):
         context['title'] = direccion
         context["accesorios"] = Accesorio.objects.filter(
             bien_id=self.kwargs['pk'])
-        for provinca in PROVINCE_CHOICES:
-            vivienda_prvincia = Vivienda.objects.get(
-                id=self.kwargs['pk']).provicia
-            if vivienda_prvincia.upper() == provinca[0]:
-                context['provincia_completo'] = provinca[1]
         tipo = Vivienda.objects.get(id=self.kwargs['pk']).tipo
         if tipo == 'depto en 3er piso o superior':
             context['tipoIcon'] = 'fa-building'

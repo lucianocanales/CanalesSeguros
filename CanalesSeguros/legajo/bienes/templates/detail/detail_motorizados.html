@@ -1,6 +1,7 @@
 {% extends "core/base.html" %}
 {% load static %}
 {% load widget_tweaks %}
+{% load mostrar_filter %}
 
 {% block breadcrumb %} 
   <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
@@ -98,6 +99,9 @@
       </p>
       <p class="text-sm">Numero de Motor
         <b class="d-block">{{motorizados.motor}}</b>
+      </p>
+      <p class="text-sm">Radica en:
+        <b class="d-block">{{motorizados.provicia|provincia_completo}}, {{motorizados.ciudad}}, CP: {{motorizados.zip_code}} </b>
       </p>
     </div>
     <div class="card">

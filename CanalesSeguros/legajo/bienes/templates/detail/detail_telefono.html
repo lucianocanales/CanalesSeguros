@@ -1,6 +1,7 @@
 {% extends "core/base.html" %}
 {% load static %}
 {% load widget_tweaks %}
+{% load mostrar_filter %}
 
 {% block breadcrumb %} 
   <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
@@ -85,6 +86,9 @@
       </p>
       <p class="text-sm">Caracteristicas
         <b class="d-block">{{telefono.caracteristicas}}</b>
+      </p>
+      <p class="text-sm">Radica en:
+        <b class="d-block">{{telefono.provicia|provincia_completo}}, {{telefono.ciudad}}, CP: {{telefono.zip_code}} </b>
       </p>
     </div>
     

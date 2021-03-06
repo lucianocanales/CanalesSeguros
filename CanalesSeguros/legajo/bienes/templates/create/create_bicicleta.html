@@ -12,13 +12,18 @@
 <form  method="POST" enctype="multipart/form-data" action=".">
     {% csrf_token %}
     
+    
     <div >
-       {{form.as_p}} 
-       
+      {% for field in form%}
+      <div class="form-group">
+        {{field.label}}
+        {{field}}
+      </div>
+      {% endfor %}
         
     </div>
     
-    <input type="submit" class="btn btn-primary" value="Go Go Gadget &rarr;">
+    <input type="submit" class="btn btn-primary" value="Crear &rarr;">
     </form>
     
     

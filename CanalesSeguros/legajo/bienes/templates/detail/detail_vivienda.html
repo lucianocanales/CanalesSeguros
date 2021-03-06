@@ -1,6 +1,7 @@
 {% extends "core/base.html" %}
 {% load static %}
 {% load widget_tweaks %}
+{% load mostrar_filter %}
 
 {% block breadcrumb %} 
   <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
@@ -73,7 +74,7 @@
     <h5>{{vivienda.tipo|capfirst}}</h5>
     <div class="text-muted">
       <p class="text-sm">Provincia
-        <b class="d-block">{{provincia_completo}}</b>
+        <b class="d-block">{{vivienda.provicia|provincia_completo}}</b>
       </p>
       <p class="text-sm">Ciudad
         <b class="d-block">{{vivienda.ciudad}}</b>

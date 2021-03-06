@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserChangeForm
-from django.forms import TextInput, FileInput, CheckboxInput
+from django.forms import TextInput, FileInput
 from django import forms
 
 from core.models import User

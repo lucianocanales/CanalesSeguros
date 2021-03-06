@@ -38,6 +38,15 @@ class BienesPersonales(models.Model):
         choices=usos_choices,
         default='privado'
     )
+    zip_code = models.IntegerField(verbose_name='Codigo Postal', default=1900)
+    ciudad = models.CharField(verbose_name='Ciudad',
+                              max_length=50, default='La Plata')
+    provicia = models.CharField(
+        verbose_name='Provincia',
+        max_length=50,
+        choices=PROVINCE_CHOICES,
+        default='b'
+    )
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
@@ -170,13 +179,6 @@ class Vivienda(BienesPersonales):
     )
 
     metros = models.IntegerField(verbose_name='Superficie')
-    zip_code = models.IntegerField(verbose_name='Codigo Postal')
-    ciudad = models.CharField(verbose_name='Ciudad', max_length=50)
-    provicia = models.CharField(
-        verbose_name='Provincia',
-        max_length=50,
-        choices=PROVINCE_CHOICES,
-    )
     direccion = models.CharField(verbose_name='Direccion', max_length=100)
 
     class Meta:

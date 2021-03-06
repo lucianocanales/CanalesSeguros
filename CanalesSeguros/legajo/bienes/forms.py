@@ -11,11 +11,15 @@ class AccesorioForm(forms.ModelForm):
 
 
 class BicicletaForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs.update({'class': 'form-control'})
 
     class Meta:
         model = Bicicleta
         fields = '__all__'
-        exclude = ('usuario_bien', 'valor')
+        exclude = ('usuario_bien', 'valor', 'tipo')
 
 
 class MotorizadosForm(forms.ModelForm):
